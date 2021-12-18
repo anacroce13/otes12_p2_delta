@@ -43,7 +43,7 @@
         // READ ALL (buscar todos os registros)
         public function buscarRequisitantes(){
             $sql = "SELECT cd_requisitante AS id, 
-                           nm_requisitante AS nome
+                           nm_requisitante AS nome_requisitante
                     FROM " . $this->db_table;
             $stmt = $this->conn->prepare($sql);
             $stmt->execute();

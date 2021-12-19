@@ -98,7 +98,7 @@
         // UPDATE (Atualizar registro)
         public function atualizarRequisicao(){
             $sql = "UPDATE ". $this->db_table ."
-                    SET
+                     SET
                         cd_requisitante = :requisitante,
                         cd_sistema = :sistema,
                         dt_requisicao = :data_requisicao,
@@ -109,7 +109,10 @@
             $stmt = $this->conn->prepare($sql);
         
             // vincular dados
-            $stmt->bindParam(":nome_requisicao", $this->nome_requisicao);
+            $stmt->bindParam(":requisitante", $this->requisitante);
+            $stmt->bindParam(":sistema", $this->sistema);
+            $stmt->bindParam(":data_requisicao", $this->data_requisicao);
+            $stmt->bindParam(":status", $this->status);
             $stmt->bindParam(":id", $this->id);
         
             // tentar atualizar

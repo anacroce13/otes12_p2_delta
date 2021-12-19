@@ -138,5 +138,39 @@
             return false;
         }
 
+        // Relatório B - Requisições em aberto por ordem cronológica ascendente
+        public function relatorioB(){
+            $sql = "SELECT r.cd_requisicao AS id, 
+                           rt.nm_requisitante AS requisitante,
+                           s.nm_sistema AS sistema,
+                           r.dt_requisicao AS data_requisicao,
+                           r.status AS status
+                   FROM requisicao r, requisitante rt, sistema s
+                   WHERE r.cd_requisitante = rt.cd_requisitante
+                   AND r.cd_sistema = s.cd_sistema
+                   AND r.status NOT LIKE '%COM%'
+                   ORDER BY data_requisicao";
+
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute();
+            return $stmt;
+        }
+
+        // Relatório C - Quantidade de Requisições por Situação
+        public function relatorioC(){
+            $sql = "SELECT s.nm_sistema AS sistema,
+                           r.status AS situacao,
+                           COUNT(r.cd_requisicao) AS qtde
+                    FROM requisicao r, requisitante rt, sistema s
+                    WHERE r.cd_requisitante = rt.cd_requisitante
+                    AND r.cd_sistema = s.cd_sistema
+                    GROUP BY s.nm_sistema, r.status
+                    ORDER BY sistema, qtde DESC";
+
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute();
+            return $stmt;
+        }
+
     }
 ?>

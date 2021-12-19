@@ -4,8 +4,8 @@
     header("Content-Type: application/json; charset=UTF-8");
     
     // includes necessários
-    include_once '../../config/conexao.php';
-    include_once '../../classe/requisicao.php';
+    include_once '../../../config/conexao.php';
+    include_once '../../../classe/requisicao.php';
 
     // Instanciar conexão
     $database = new Conexao();
@@ -15,7 +15,7 @@
     $itens = new Requisicao($db);
 
     // Buscar método relacionado na classe
-    $stmt = $itens->buscarRequisicoes();
+    $stmt = $itens->relatorioB();
     
     // Contar itens
     $i = $stmt->rowCount();

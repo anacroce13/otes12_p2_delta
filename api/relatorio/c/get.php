@@ -4,8 +4,8 @@
     header("Content-Type: application/json; charset=UTF-8");
     
     // includes necessários
-    include_once '../../config/conexao.php';
-    include_once '../../classe/requisicao.php';
+    include_once '../../../config/conexao.php';
+    include_once '../../../classe/requisicao.php';
 
     // Instanciar conexão
     $database = new Conexao();
@@ -15,7 +15,7 @@
     $itens = new Requisicao($db);
 
     // Buscar método relacionado na classe
-    $stmt = $itens->buscarRequisicoes();
+    $stmt = $itens->relatorioC();
     
     // Contar itens
     $i = $stmt->rowCount();
@@ -29,16 +29,8 @@
 
         // Loop para buscar todos os registros
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
-            extract($row);
-            $e = array(
-                "id" => $id,
-                "requisitante" => $requisitante,
-                "sistema" => $sistema,
-                "data_requisicao" => $data_requisicao,
-                "status" => $status
-            );
 
-            array_push($requisicaoArr["dados"], $e);
+            array_push($requisicaoArr["dados"], $row);
         }
         // exportar em JSON
         echo json_encode($requisicaoArr);

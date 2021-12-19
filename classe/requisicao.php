@@ -1,5 +1,5 @@
 <?php
-    class requisicao{
+    class Requisicao{
 
         // Atributos de conexão
         private $conn;
@@ -7,9 +7,9 @@
 
         // Atributos da entidade (são as colunas da tabela vinculada à essa classe/entidade)
         public $id;
-        public $nome_requisitante;
-        public $nome_sistema;
-        public $data;
+        public $requisitante;
+        public $sistema;
+        public $data_requisicao;
         public $status;
 
         // Instanciar conexão
@@ -25,12 +25,18 @@
         public function criarRequisicao(){
             $sql = "INSERT INTO ". $this->db_table .
                    "SET
-                        nm_requisicao = :nome_requisicao";
+                        cd_requisitante = :requisitante,
+                        cd_sistema = :sistema,
+                        dt_requisicao = :data_requisicao,
+                        status = :status";
         
             $stmt = $this->conn->prepare($sql);
         
             // vincular dados
-            $stmt->bindParam(":nome_requisicao", $this->nome_requisicao);
+            $stmt->bindParam(":requisitante", $this->requisitante);
+            $stmt->bindParam(":sistema", $this->sistema);
+            $stmt->bindParam(":data_requisicao", $this->data_requisicao);
+            $stmt->bindParam(":status", $this->status);
         
             // tentar inserir
             if($stmt->execute()){
@@ -93,7 +99,10 @@
         public function atualizarRequisicao(){
             $sql = "UPDATE ". $this->db_table ."
                     SET
-                        nm_requisicao = :nome_requisicao
+                        cd_requisitante = :requisitante,
+                        cd_sistema = :sistema,
+                        dt_requisicao = :data_requisicao,
+                        status = :status
                     WHERE 
                         cd_requisicao = :id";
         

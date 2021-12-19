@@ -19,7 +19,7 @@
             */
 
         // CREATE (criar registro)
-        public function criarsistema(){
+        public function criarSistema(){
             $sql = "INSERT INTO ". $this->db_table .
                    "SET
                         nm_sistema = :nome_sistema";
@@ -41,7 +41,7 @@
         }
 
         // READ ALL (buscar todos os registros)
-        public function buscarsistemas(){
+        public function buscarSistemas(){
             $sql = "SELECT cd_sistema AS id, 
                            nm_sistema AS nome_sistema
                     FROM " . $this->db_table;
@@ -51,7 +51,7 @@
         }
 
         // READ (buscar registro específico)
-        public function buscarsistema(){
+        public function buscarSistema(){
             $sql = "SELECT cd_sistema, 
                            nm_sistema
                       FROM ". $this->db_table . "
@@ -74,7 +74,7 @@
         }   
 
         // UPDATE (Atualizar registro)
-        public function atualizarsistema(){
+        public function atualizarSistema(){
             $sql = "UPDATE ". $this->db_table ."
                     SET
                         nm_sistema = :nome_sistema
@@ -99,7 +99,7 @@
         }
 
         // DELETE (Excluir registro)
-        function excluirsistema(){
+        function excluirSistema(){
             $sql = "DELETE FROM " . $this->db_table . " WHERE id = ?";
             $stmt = $this->conn->prepare($sql);
         

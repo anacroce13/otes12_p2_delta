@@ -8,24 +8,23 @@
 
     // includes necessários
     include_once '../../config/conexao.php';
-    include_once '../../classe/requisitante.php';
+    include_once '../../classe/sistema.php';
 
     // Instanciar conexão
     $database = new Conexao();
     $db = $database->conectar();
 
     // Criar objeto
-    $item = new Requisitante($db);
+    $item = new Sistema($db);
 
     // Buscar dados para criar registro
     $input = json_decode(file_get_contents("php://input"));
 
     $item->id = $input->id;
-    $item->nome_requisitante = $input->nome_requisitante;
     
-    if($item->atualizarRequisitante()){
-        echo 'Requisitante atualizado com sucesso!';
+    if($item->excluirSistema()){
+        echo 'Sistema excluído com sucesso. (Ops, tomara que você tenha desejado fazer isto mesmo!)';
     } else{
-        echo 'Não foi possível atualizar este Requisitante.';
+        echo 'Não foi possível excluir o registro do sistema. Identificador inválido.';
     }
 ?>

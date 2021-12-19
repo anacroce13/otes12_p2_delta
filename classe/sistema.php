@@ -21,7 +21,7 @@
         // CREATE (criar registro)
         public function criarSistema(){
             $sql = "INSERT INTO ". $this->db_table .
-                   "SET
+                   " SET
                         nm_sistema = :nome_sistema";
         
             $stmt = $this->conn->prepare($sql);
@@ -55,7 +55,7 @@
             $sql = "SELECT cd_sistema, 
                            nm_sistema
                       FROM ". $this->db_table . "
-                    WHERE  id = ?
+                    WHERE cd_sistema = ?
                     LIMIT 0,1";
 
             $stmt = $this->conn->prepare($sql);
@@ -107,7 +107,6 @@
         
             // tentar excluir
             if($stmt->execute()){
-                echo "Registro excluído com sucesso. (Ops, tomara que você tenha desejado fazer isto mesmo!)";
                 return true;
             }
             echo "Não foi possível excluir o registro.";

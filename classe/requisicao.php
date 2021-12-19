@@ -24,7 +24,7 @@
         // CREATE (criar registro)
         public function criarRequisicao(){
             $sql = "INSERT INTO ". $this->db_table .
-                   "SET
+                   " SET
                         cd_requisitante = :requisitante,
                         cd_sistema = :sistema,
                         dt_requisicao = :data_requisicao,
@@ -52,9 +52,9 @@
         // READ ALL (buscar todos os registros)
         public function buscarRequisicoes(){
             $sql = "SELECT r.cd_requisicao AS id, 
-                           rt.nm_requisitante AS nome_requisitante,
-                           s.nm_sistema AS nome_sistema,
-                           r.dt_requisicao AS data,
+                           rt.nm_requisitante AS requisitante,
+                           s.nm_sistema AS sistema,
+                           r.dt_requisicao AS data_requisicao,
                            r.status AS status
                     FROM requisicao r, requisitante rt, sistema s
                     WHERE r.cd_requisitante = rt.cd_requisitante
@@ -66,11 +66,11 @@
 
         // READ (buscar registro específico)
         public function buscarRequisicao(){
-            $sql = "SELECT r.cd_requisicao AS id, 
-                           rt.nm_requisitante AS nome_requisitante,
-                           s.nm_sistema AS nome_sistema,
-                           r.dt_requisicao AS data,
-                           r.status AS status
+            $sql = "SELECT r.cd_requisicao,
+                           rt.nm_requisitante,
+                           s.nm_sistema,
+                           r.dt_requisicao,
+                           r.status
                     FROM requisicao r, requisitante rt, sistema s
                     WHERE r.cd_requisitante = rt.cd_requisitante
                     AND r.cd_sistema = s.cd_sistema
@@ -87,9 +87,9 @@
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
             
             $this->id = $row['cd_requisicao'];
-            $this->nome_requisitante = $row['nm_requisitante'];
-            $this->nome_sistema = $row['nm_sistema'];
-            $this->data = $row['dt_requisicao'];
+            $this->requisitante = $row['nm_requisitante'];
+            $this->sistema = $row['nm_sistema'];
+            $this->data_requisicao = $row['dt_requisicao'];
             $this->status = $row['status'];
 
             return $row;
@@ -132,7 +132,6 @@
         
             // tentar excluir
             if($stmt->execute()){
-                echo "Registro excluído com sucesso. (Ops, tomara que você tenha desejado fazer isto mesmo!)";
                 return true;
             }
             echo "Não foi possível excluir o registro.";

@@ -8,24 +8,27 @@
 
     // includes necessários
     include_once '../../config/conexao.php';
-    include_once '../../classe/requisitante.php';
+    include_once '../../classe/requisicao.php';
 
     // Instanciar conexão
     $database = new Conexao();
     $db = $database->conectar();
 
     // Criar objeto
-    $item = new Requisitante($db);
+    $item = new Requisicao($db);
 
     // Buscar dados para criar registro
     $input = json_decode(file_get_contents("php://input"));
 
     $item->id = $input->id;
-    $item->nome_requisitante = $input->nome_requisitante;
+    $item->requisitante = $input->requisitante;
+    $item->sistema = $input->sistema;
+    $item->data_requisicao = date($input->data_requisicao);
+    $item->status = $input->status;
     
-    if($item->atualizarRequisitante()){
-        echo 'Requisitante atualizado com sucesso!';
+    if($item->atualizarRequisicao()){
+        echo 'Requisição atualizada com sucesso!';
     } else{
-        echo 'Não foi possível atualizar este Requisitante.';
+        echo 'Não foi possível atualizar a requisição.';
     }
 ?>

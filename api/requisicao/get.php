@@ -20,9 +20,6 @@
     // Contar itens
     $i = $stmt->rowCount();
 
-    // creio que a linha abaixo é desnecessária
-    // echo json_encode($i);
-
     // Tratar retorno
     if($i > 0){
         
@@ -35,9 +32,9 @@
             extract($row);
             $e = array(
                 "id" => $id,
-                "nome_requisitante" => $nome_requisitante,
-                "nome_sistema" => $nome_sistema,
-                "data" => $data,
+                "requisitante" => $requisitante,
+                "sistema" => $sistema,
+                "data_requisicao" => $data_requisicao,
                 "status" => $status
             );
 

@@ -21,7 +21,7 @@
         // CREATE (criar registro)
         public function criarRequisitante(){
             $sql = "INSERT INTO ". $this->db_table .
-                   "SET
+                   " SET
                         nm_requisitante = :nome_requisitante";
         
             $stmt = $this->conn->prepare($sql);
@@ -37,6 +37,7 @@
 
             // tratar falha
             echo "Não foi possível inserir o registro.";
+            print_r($stmt->errorInfo());
             return false;
         }
 
@@ -55,7 +56,7 @@
             $sql = "SELECT cd_requisitante, 
                            nm_requisitante
                       FROM ". $this->db_table . "
-                    WHERE  id = ?
+                    WHERE  cd_requisitante = ?
                     LIMIT 0,1";
 
             $stmt = $this->conn->prepare($sql);
@@ -107,7 +108,6 @@
         
             // tentar excluir
             if($stmt->execute()){
-                echo "Registro excluído com sucesso. (Ops, tomara que você tenha desejado fazer isto mesmo!)";
                 return true;
             }
             echo "Não foi possível excluir o registro.";

@@ -15,13 +15,10 @@
     $itens = new sistema($db);
 
     // Buscar método relacionado na classe
-    $stmt = $itens->buscarsistemas();
+    $stmt = $itens->buscarSistemas();
     
     // Contar itens
     $i = $stmt->rowCount();
-
-    // creio que a linha abaixo é desnecessária
-    // echo json_encode($i);
 
     // Tratar retorno
     if($i > 0){

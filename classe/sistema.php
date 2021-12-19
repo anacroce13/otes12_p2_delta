@@ -100,7 +100,7 @@
 
         // DELETE (Excluir registro)
         function excluirSistema(){
-            $sql = "DELETE FROM " . $this->db_table . " WHERE id = ?";
+            $sql = "DELETE FROM " . $this->db_table . " WHERE cd_sistema = ?";
             $stmt = $this->conn->prepare($sql);
         
             $stmt->bindParam(1, $this->id);
@@ -110,6 +110,7 @@
                 return true;
             }
             echo "Não foi possível excluir o registro.";
+            print_r($stmt->errorInfo());
             return false;
         }
 

@@ -101,7 +101,7 @@
 
         // DELETE (Excluir registro)
         function excluirRequisitante(){
-            $sql = "DELETE FROM " . $this->db_table . " WHERE id = ?";
+            $sql = "DELETE FROM " . $this->db_table . " WHERE cd_requisitante = ?";
             $stmt = $this->conn->prepare($sql);
         
             $stmt->bindParam(1, $this->id);
